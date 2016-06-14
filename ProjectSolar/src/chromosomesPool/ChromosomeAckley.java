@@ -1,25 +1,19 @@
 package chromosomesPool;
 import abstracts.Chromosome;
-
-import auxiliaries.Configuration;
 import problems.MathFunctions;
 
 public class ChromosomeAckley extends Chromosome {
-	private static final double infimum = -40;
-	private static final double maximum = 40;
-	private static final int nObjectives = 1;
+	private static final double INFIMUM = -40;
+	private static final double MAXIMUM = 40;
+	private static final int NOBJECTIVES = 1;
 
 	private ChromosomeAckley(double genes[], double objectives[]) {
 		super(genes, objectives);
 	}
 	
 	public static ChromosomeAckley createChromosome(int nGenes) {
-		double genes[] = new double[nGenes]; double val = 0;
-		for (int i = 0; i < genes.length; i++) {
-			val = Configuration.mt.nextDouble(true, true); // inclusive [0, 1]
-			genes[i] = (1 - val) * infimum + val * maximum;
-		}
-		return new ChromosomeAckley(genes, new double[nObjectives]);
+		double genes[] = initializeGenesAtRandom(nGenes, INFIMUM, MAXIMUM); // From superclass
+		return new ChromosomeAckley(genes, new double[NOBJECTIVES]);
 	}
 	
 	@Override

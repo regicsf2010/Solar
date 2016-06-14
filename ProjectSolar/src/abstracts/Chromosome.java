@@ -2,6 +2,8 @@ package abstracts;
 
 import java.text.DecimalFormat;
 
+import auxiliaries.Configuration;
+
 public abstract class Chromosome {
 	private double fitness;
 	private double genes[];
@@ -75,6 +77,25 @@ public abstract class Chromosome {
 		return output;
 	}
 
+	/**
+	 * This method must be protected and static fashion.
+	 * Protected: subclass purpose only.
+	 * Static: subclass purpose only. The subclass method that uses this method is static. 
+	 * Therefore, this method must be static as well.
+	 * @param nGenes
+	 * @param infimum
+	 * @param maximum
+	 * @return
+	 */
+	protected static double[] initializeGenesAtRandom(int nGenes, double infimum, double maximum) {
+		double genes[] = new double[nGenes]; double val = 0;
+		for (int i = 0; i < genes.length; i++) {
+			val = Configuration.mt.nextDouble(true, true); // inclusive [0, 1]
+			genes[i] = (1 - val) * infimum + val * maximum;
+		}
+		return genes;
+	}
+	
 	/**
 	 * Abstract method for setting the fitness value.
 	 * Subclasses must call setFitness() to properly store fitness.
