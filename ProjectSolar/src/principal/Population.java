@@ -1,16 +1,29 @@
 package principal;
 
 import abstracts.Chromosome;
-import auxiliaries.Configuration;
+import auxiliaries.Configuration.Ackley;
+import auxiliaries.Configuration.Eggholder;
+import auxiliaries.Configuration.Griewank;
+import auxiliaries.Configuration.Rastrigin;
+import auxiliaries.Configuration.Rosenbrock;
+import auxiliaries.Configuration.SchafferF7;
+import auxiliaries.Configuration.SchafferN2;
+import auxiliaries.Configuration.SchafferN4;
 import chromosomesPool.ChromosomeAckley;
+import chromosomesPool.ChromosomeEggholder;
+import chromosomesPool.ChromosomeGriewank;
+import chromosomesPool.ChromosomeRastrigin;
+import chromosomesPool.ChromosomeRosenbrock;
+import chromosomesPool.ChromosomeSchafferF7;
+import chromosomesPool.ChromosomeSchafferN2;
+import chromosomesPool.ChromosomeSchafferN4;
 
 public class Population {
 	
 	/*Population instances*/
 	private Chromosome chromoPool[] = null;
 	private int nChromosome = 0;
-	private boolean busy;
-	
+		
 	/*Statistical measures*/
 	private double fitnessMean = 0;
 	private double fitnessStd = 0;
@@ -20,15 +33,29 @@ public class Population {
 	public static Population createPopulation(int nChromosome, int function) {
 		Population p = new Population(nChromosome);
 		for (int i = 0; i < nChromosome; i++)
-			p.setChromosome(i, getInstanceOfChromosome(function));
+			p.setChromosome(i, chromosomeFactory(function));
 		
 		return p;
 	}
 	
-	private static Chromosome getInstanceOfChromosome(int function) {
+	private static Chromosome chromosomeFactory(int function) {
 		switch(function) {
-		case Configuration.ACKLEY:
-			return ChromosomeAckley.createChromosome(Configuration.nGenes);
+		case Ackley.ID:
+			return ChromosomeAckley.createChromosome(Ackley.NGENES);
+		case SchafferN2.ID:
+			return ChromosomeSchafferN2.createChromosome(SchafferN2.NGENES);
+		case SchafferN4.ID:
+			return ChromosomeSchafferN4.createChromosome(SchafferN4.NGENES);
+		case SchafferF7.ID:
+			return ChromosomeSchafferF7.createChromosome(SchafferF7.NGENES);
+		case Eggholder.ID:
+			return ChromosomeEggholder.createChromosome(Eggholder.NGENES);
+		case Griewank.ID:
+			return ChromosomeGriewank.createChromosome(Griewank.NGENES);
+		case Rastrigin.ID:
+			return ChromosomeRastrigin.createChromosome(Rastrigin.NGENES);
+		case Rosenbrock.ID:
+			return ChromosomeRosenbrock.createChromosome(Rosenbrock.NGENES);
 		default:
 			System.out.println("Function not implemented yet.");
 			return null;			
@@ -47,14 +74,6 @@ public class Population {
 	
 	public void setChromosome(int index, Chromosome c) {
 		this.chromoPool[index] = c;
-	}
-	
-	public void setBusy(boolean busy) {
-		this.busy = busy;
-	}
-	
-	public boolean isBusy() {
-		return this.busy;
 	}
 	
 	public int getSize() {
@@ -114,7 +133,6 @@ public class Population {
 		}
 	}
 	
-	//TODO verificar
 	public int getFittest() {
 		int idx = 0; double bestFitness = Double.MAX_VALUE;
 		for (int i = 0; i < this.getSize(); i++) {

@@ -9,6 +9,8 @@ public abstract class Chromosome {
 	private double genes[];
 	private double objectives[];
 	
+	private boolean busy;
+	
 	public Chromosome(double genes[], double objectives[]) {
 		this.genes = genes;
 		this.objectives = objectives;
@@ -42,6 +44,16 @@ public abstract class Chromosome {
 	public void setObjective(int index, double value) {
 		this.objectives[index] = value;
 	}
+	
+	public void setBusy(boolean busy) {
+		this.busy = busy;
+	}
+	
+	public boolean isBusy() {
+		return this.busy;
+	}
+	
+	
 
 	public double getObjective(int index) {
 		return this.objectives[index];
