@@ -18,14 +18,16 @@ public class Solar implements Runnable {
 	private Population p = null;
 	private Population selected = null;
 	private int function = -1;
+	private int id = -1; 
 	
 	private ParentSelection parentSelecionI = null;
 	private Crossover crossoverI = null;
 	private Mutation mutationI = null;
 	private SurvivorSelection survivorSelectionI = null;
 	
-	public Solar(int function) {
+	public Solar(int function, int id) {
 		this.function = function;
+		this.id = id;
 	}
 	
 	public Population getPopulation() {
@@ -39,6 +41,10 @@ public class Solar implements Runnable {
 	private void calculateFitness(Population pop) {
 		for (int i = 0; i < pop.getSize(); i++)
 			pop.getChromosome(i).evaluate();		
+	}
+	
+	public int getId() {
+		return this.id;
 	}
 	
 	public void setParentSelectionInterface(ParentSelection parentSelecionI) {
@@ -59,7 +65,7 @@ public class Solar implements Runnable {
 	
 	@Override
 	public void run() {
-
+		
 		this.initializePopulation();
 		this.calculateFitness(p);
 		
