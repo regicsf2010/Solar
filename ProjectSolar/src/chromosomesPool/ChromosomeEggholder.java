@@ -23,4 +23,8 @@ public class ChromosomeEggholder extends Chromosome {
 		super.setObjective(0, value); // zero is necessary. 
 		super.setFitness(value);	  // Ackley's function has one objective (fitness).
 	}
+	
+	public static ChromosomeEggholder createEmptyChromosome(int nGenes) {
+		return new ChromosomeEggholder(new double[nGenes], new double[NOBJECTIVES]);
+	}
 }

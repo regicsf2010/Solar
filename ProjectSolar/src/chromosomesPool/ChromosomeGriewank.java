@@ -23,4 +23,8 @@ public class ChromosomeGriewank extends Chromosome {
 		super.setObjective(0, value); // zero is necessary. 
 		super.setFitness(value);	  // Ackley's function has one objective (fitness).
 	}
+	
+	public static ChromosomeGriewank createEmptyChromosome(int nGenes) {
+		return new ChromosomeGriewank(new double[nGenes], new double[NOBJECTIVES]);
+	}
 }

@@ -23,4 +23,8 @@ public class ChromosomeSchafferN2 extends Chromosome {
 		super.setObjective(0, value); // zero is necessary. 
 		super.setFitness(value);	  // Ackley's function has one objective (fitness).
 	}
+	
+	public static ChromosomeSchafferN2 createEmptyChromosome(int nGenes) {
+		return new ChromosomeSchafferN2(new double[nGenes], new double[NOBJECTIVES]);
+	}
 }

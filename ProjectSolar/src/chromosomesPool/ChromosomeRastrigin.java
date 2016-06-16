@@ -23,4 +23,8 @@ public class ChromosomeRastrigin extends Chromosome {
 		super.setObjective(0, value); // zero is necessary. 
 		super.setFitness(value);	  // Ackley's function has one objective (fitness).
 	}
+	
+	public static ChromosomeRastrigin createEmptyChromosome(int nGenes) {
+		return new ChromosomeRastrigin(new double[nGenes], new double[NOBJECTIVES]);
+	}
 }

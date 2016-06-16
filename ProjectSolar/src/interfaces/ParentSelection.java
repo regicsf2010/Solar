@@ -1,12 +1,12 @@
 package interfaces;
 
-import abstracts.Chromosome;
+import principal.Population;
 
 public interface ParentSelection {
 	
 	/**
 	 * This scheme returns a copy of each selected parent in the population. 
-	 * @return The mating pool, i.e., an array of selected chromosomes.
+	 * @return The mating pool, i.e., the parents.
 	 */
-	public Chromosome[] doParentSelection(Chromosome population[]);
+	public Population doParentSelection(Population p);
 }

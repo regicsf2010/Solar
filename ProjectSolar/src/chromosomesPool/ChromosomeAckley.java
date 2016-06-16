@@ -22,4 +22,8 @@ public class ChromosomeAckley extends Chromosome {
 		super.setObjective(0, value); // zero is necessary. 
 		super.setFitness(value);	  // Ackley's function has one objective (fitness).
 	}
+
+	public static ChromosomeAckley createEmptyChromosome(int nGenes) {
+		return new ChromosomeAckley(new double[nGenes], new double[NOBJECTIVES]);
+	}
 }

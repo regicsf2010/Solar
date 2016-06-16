@@ -114,4 +114,5 @@ public abstract class Chromosome {
 	 * Subclasses must call setFitness() to properly store fitness.
 	 */
 	public abstract void evaluate();
+		
 }

@@ -1,14 +1,13 @@
 package interfaces;
 
-import abstracts.Chromosome;
+import principal.Population;
 
 public interface Crossover {
-
+	
 	/**
-	 * Using the concept of parameters passed by reference.
-	 * The result of the crossover (offspring) is in c1 and c2 objects themselves.
-	 * @param c1 First parent
-	 * @param c2 Second parent
+	 * 
+	 * @param parents 
+	 * @return
 	 */
-	public void doCrossover(Chromosome c1, Chromosome c2);
+	public Population doCrossover(Population parents);
 }

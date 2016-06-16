@@ -1,11 +1,8 @@
 package interfaces;
 
-import abstracts.Chromosome;
+import principal.Population;
 
 public interface SurvivorSelection {
-	/**
-	 * This scheme returns a copy of each survivor between current offspring and population. 
-	 * @return The survivors chromosomes, i.e., an array of chromosomes.
-	 */
-	public Chromosome[] doSurvivorSelection(Chromosome population[]);
+	
+	public Population doSurvivorSelection(Population p, Population offspring);
 }
