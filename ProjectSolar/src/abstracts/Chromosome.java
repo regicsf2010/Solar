@@ -18,7 +18,7 @@ public abstract class Chromosome {
 		this.setFitness(0);
 	}
 	
-	protected void setFitness(double fitness) {
+	public void setFitness(double fitness) {
 		this.fitness = fitness;
 	}
 	
@@ -86,7 +86,7 @@ public abstract class Chromosome {
 		
 		output += "Fitness = " + df.format(this.fitness) + "\n"; // output fitness
 		
-		output += "Warning = Rounded (format #.###)\n";
+		//output += "Warning = Rounded (format #.###)\n";
 		return output;
 	}
 
@@ -103,7 +103,7 @@ public abstract class Chromosome {
 	protected static double[] initializeGenesAtRandom(int nGenes, double infimum, double maximum) {
 		double genes[] = new double[nGenes]; double val = 0;
 		for (int i = 0; i < genes.length; i++) {
-			val = Configuration.mt.nextDouble(true, true); // inclusive [0, 1]
+			val = Configuration.MT.nextDouble(true, true); // inclusive [0, 1]
 			genes[i] = (1 - val) * infimum + val * maximum;
 		}
 		return genes;

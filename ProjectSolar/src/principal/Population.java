@@ -22,58 +22,105 @@ public class Population {
 	
 	/*Population instances*/
 	private Chromosome chromoPool[] = null;
-	private int nChromosome = 0;
-		
+	private int nChromosome = 0;	
+	private int function = -1;
+	
 	/*Statistical measures*/
 	private double fitnessMean = 0;
 	private double fitnessStd = 0;
 	private double objectivesMean[] = null;
 	private double objectivesStd[] = null;
 	
-	public static Population createPopulation(int nChromosome, int function) {
-		Population p = new Population(nChromosome);
-		for (int i = 0; i < nChromosome; i++)
-			p.setChromosome(i, chromosomeFactory(function));
+	public static Population createPopulation(int nChromosome, int function, boolean random) {
+		Population p = new Population(nChromosome, function);
+		for (int i = 0; i < nChromosome; i++) // must be always done
+			p.chromoPool[i] = chromosomeEmptyFactory(function);			
+		
+		if(random) // call factory for randomize genes 
+			for (int i = 0; i < nChromosome; i++)
+				p.setChromosome(i, chromosomeFactory(function));
 		
 		return p;
 	}
 	
-	private static Chromosome chromosomeFactory(int function) {
+	private static Chromosome chromosomeEmptyFactory(int function) {
 		switch(function) {
 		case Ackley.ID:
-			return ChromosomeAckley.createChromosome(Ackley.NGENES);
+			return ChromosomeAckley.createEmptyChromosome(Ackley.NGENES);
 		case SchafferN2.ID:
-			return ChromosomeSchafferN2.createChromosome(SchafferN2.NGENES);
+			return ChromosomeSchafferN2.createEmptyChromosome(SchafferN2.NGENES);
 		case SchafferN4.ID:
-			return ChromosomeSchafferN4.createChromosome(SchafferN4.NGENES);
+			return ChromosomeSchafferN4.createEmptyChromosome(SchafferN4.NGENES);
 		case SchafferF7.ID:
-			return ChromosomeSchafferF7.createChromosome(SchafferF7.NGENES);
+			return ChromosomeSchafferF7.createEmptyChromosome(SchafferF7.NGENES);
 		case Eggholder.ID:
-			return ChromosomeEggholder.createChromosome(Eggholder.NGENES);
+			return ChromosomeEggholder.createEmptyChromosome(Eggholder.NGENES);
 		case Griewank.ID:
-			return ChromosomeGriewank.createChromosome(Griewank.NGENES);
+			return ChromosomeGriewank.createEmptyChromosome(Griewank.NGENES);
 		case Rastrigin.ID:
-			return ChromosomeRastrigin.createChromosome(Rastrigin.NGENES);
+			return ChromosomeRastrigin.createEmptyChromosome(Rastrigin.NGENES);
 		case Rosenbrock.ID:
-			return ChromosomeRosenbrock.createChromosome(Rosenbrock.NGENES);
+			return ChromosomeRosenbrock.createEmptyChromosome(Rosenbrock.NGENES);
 		default:
 			System.out.println("Function not implemented yet.");
 			return null;			
-		}		
+		}	
+	}
+	
+	private static Chromosome chromosomeFactory(int function) {
+		switch(function) {
+			case Ackley.ID:
+				return ChromosomeAckley.createChromosome(Ackley.NGENES);
+			case SchafferN2.ID:
+				return ChromosomeSchafferN2.createChromosome(SchafferN2.NGENES);
+			case SchafferN4.ID:
+				return ChromosomeSchafferN4.createChromosome(SchafferN4.NGENES);
+			case SchafferF7.ID:
+				return ChromosomeSchafferF7.createChromosome(SchafferF7.NGENES);
+			case Eggholder.ID:
+				return ChromosomeEggholder.createChromosome(Eggholder.NGENES);
+			case Griewank.ID:
+				return ChromosomeGriewank.createChromosome(Griewank.NGENES);
+			case Rastrigin.ID:
+				return ChromosomeRastrigin.createChromosome(Rastrigin.NGENES);
+			case Rosenbrock.ID:
+				return ChromosomeRosenbrock.createChromosome(Rosenbrock.NGENES);
+			default:
+				System.out.println("Function not implemented yet.");
+				return null;			
+		}				
 	}
 
-	
-	private Population(int nChromosome) {
-		 this.chromoPool = new ChromosomeAckley[nChromosome];
+	private Population(int nChromosome, int function) {
+		 this.chromoPool = new Chromosome[nChromosome];
 		 this.nChromosome = nChromosome;
+		 this.function = function;
 	}
 	
 	public Chromosome getChromosome(int index) {
 		return this.chromoPool[index];
 	}
 	
+	/**
+	 * Rough way to copy a chromosome.
+	 * @param index position of the internal chromosome
+	 * @param c chromosome to be copied
+	 */
 	public void setChromosome(int index, Chromosome c) {
-		this.chromoPool[index] = c;
+		// Copy genes 
+		for (int i = 0; i < c.getGenes().length; i++)
+			this.chromoPool[index].setGene(i, c.getGene(i));
+		// Copy objectives		
+		for (int i = 0; i < c.getObjectives().length; i++) 
+			this.chromoPool[index].setObjective(i, c.getObjective(i));
+		// Copy fitness		
+		this.chromoPool[index].setFitness(c.getFitness());
+		// Copy status
+		this.chromoPool[index].setBusy(c.isBusy());		
+	}
+	
+	public int getFunction() {
+		return this.function;
 	}
 	
 	public int getSize() {

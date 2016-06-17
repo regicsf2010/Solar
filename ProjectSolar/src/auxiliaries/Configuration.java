@@ -1,15 +1,16 @@
 package auxiliaries;
 
 public class Configuration {
-	public static int nPopulation = 10;
-	public static int nChromosome = 5;
-	public static int nGeneration = 100;
+	public static final int NPOPULATION = 10;
+	public static final int NCHROMOSOME = 4; // must be even ('cause of crossover)
+	public static final int NGENERATION = 100;	
 	
+	public static final double CROSSOVERRATE = 0.8;
+	public static final double MUTATIONRATE = 0.01;
+	public static final double MIGRATIONRATE = 0.1;
+	public static final int RANK = 3;
 	
-	public static double crossoverRate = 0.8;
-	public static double mutationRate = 0.01;
-	public static double migrationRate = 0.1;
-	public static final MersenneTwisterFast mt = new MersenneTwisterFast(System.currentTimeMillis());
+	public static final MersenneTwisterFast MT = new MersenneTwisterFast(System.currentTimeMillis());
 	
 	/*Simple structures for each problem*/
 	public class Ackley { public static final int ID = 0; public static final int NGENES = 2; }

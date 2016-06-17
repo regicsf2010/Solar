@@ -35,7 +35,7 @@ public class Solar implements Runnable {
 	}
 	
 	private void initializePopulation() {
-		this.p = Population.createPopulation(Configuration.nChromosome, this.function);
+		this.p = Population.createPopulation(Configuration.NCHROMOSOME, this.function, true);
 	}
 	
 	private void calculateFitness(Population pop) {
@@ -69,7 +69,7 @@ public class Solar implements Runnable {
 		this.initializePopulation();
 		this.calculateFitness(p);
 		
-		for (int i = 0; i < Configuration.nGeneration; i++) {
+		for (int i = 0; i < Configuration.NGENERATION; i++) {
 			this.selected = this.parentSelecionI.doParentSelection(p);
 			this.selected = this.crossoverI.doCrossover(selected);
 			this.mutationI.doMutation(selected);
