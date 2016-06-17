@@ -101,6 +101,10 @@ public class Population {
 		return this.chromoPool[index];
 	}
 	
+	public Chromosome[] getChromosomes() {
+		return this.chromoPool;
+	}
+	
 	/**
 	 * Rough way to copy a chromosome.
 	 * @param index position of the internal chromosome

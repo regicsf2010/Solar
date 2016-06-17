@@ -2,13 +2,14 @@ package auxiliaries;
 
 public class Configuration {
 	public static final int NPOPULATION = 10;
-	public static final int NCHROMOSOME = 4; // must be even ('cause of crossover)
+	public static final int NCHROMOSOME = 2; // must be even ('cause of crossover)
 	public static final int NGENERATION = 100;	
 	
 	public static final double CROSSOVERRATE = 0.8;
 	public static final double MUTATIONRATE = 0.01;
 	public static final double MIGRATIONRATE = 0.1;
-	public static final int RANK = 3;
+	public static final double SD = 0.3;
+	public static final int RANK = 3;	
 	
 	public static final MersenneTwisterFast MT = new MersenneTwisterFast(System.currentTimeMillis());
 	
