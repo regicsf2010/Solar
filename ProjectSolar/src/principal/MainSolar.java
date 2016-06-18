@@ -1,7 +1,11 @@
 package principal;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 import auxiliaries.Configuration;
 import auxiliaries.Configuration.Ackley;
+import comparators.FitnessAscendantComparator;
 import implementations.ArithmeticCrossover;
 import implementations.BestPairSurvivorSelection;
 import implementations.GaussianMutation;
@@ -10,6 +14,24 @@ import implementations.TournamentSelection;
 public class MainSolar {
 	
 	public static void main(String args[]) {
+		interfaceTest();
+	}
+	
+	public static void interfaceTest() {
+		Population p = Population.createPopulation(Configuration.NCHROMOSOME, Ackley.ID, true);
+		for (int i = 0; i < p.getSize(); i++) {
+			p.getChromosome(i).evaluate();
+			System.out.println(p.getChromosome(i).toString());
+		}
+		BestPairSurvivorSelection bp = new BestPairSurvivorSelection();
+		Collections.sort(Arrays.asList(p.getChromosomes()), new FitnessAscendantComparator());
+		for (int i = 0; i < p.getSize(); i++) {
+			System.out.println(p.getChromosome(i).toString());
+		}
+		
+	}
+	
+	public static void mainProgram(String args[]) {
 		/* Store new instances of the problem */ 
 		Solar solars[] = new Solar[Configuration.NPOPULATION];
 		
