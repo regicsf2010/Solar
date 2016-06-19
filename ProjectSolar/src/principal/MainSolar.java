@@ -14,7 +14,18 @@ import implementations.TournamentSelection;
 public class MainSolar {
 	
 	public static void main(String args[]) {
-		interfaceTest();
+		//interfaceTest();
+		Solar s = new Solar(Ackley.ID, 0);
+		s.setParentSelectionInterface(new TournamentSelection());
+		s.setCrossoverInterface(new ArithmeticCrossover());
+		s.setMutationInterface(new GaussianMutation());
+		s.setSurvivorSelectionInterface(new BestPairSurvivorSelection());
+		
+		s.run();
+		
+		for (int i = 0; i < s.getPopulation().getChromosomes().length; i++) {
+			System.out.println(s.getPopulation().getChromosome(i).toString());
+		}
 	}
 	
 	public static void interfaceTest() {
@@ -23,7 +34,7 @@ public class MainSolar {
 			p.getChromosome(i).evaluate();
 			System.out.println(p.getChromosome(i).toString());
 		}
-		BestPairSurvivorSelection bp = new BestPairSurvivorSelection();
+		
 		Collections.sort(Arrays.asList(p.getChromosomes()), new FitnessAscendantComparator());
 		for (int i = 0; i < p.getSize(); i++) {
 			System.out.println(p.getChromosome(i).toString());
