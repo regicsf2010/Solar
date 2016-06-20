@@ -7,19 +7,13 @@ import implementations.BestPairSurvivorSelection;
 import implementations.ExchangeMigration;
 import implementations.GaussianMutation;
 import implementations.HiperArithmeticCrossover;
+import implementations.HiperGaussianMutation;
 import implementations.TournamentSelection;
 
 public class MainSolar {
 	
 	public static void main(String args[]) {
-//		ChromosomeAckley a = ChromosomeAckley.createChromosome(2);
-//		a.setGene(0, -0.95);
-//		a.setGene(1, -0.011);
-//		a.evaluate();
-//		System.out.println(a.toString());
-		
-		mainProgram(null);
-	
+		mainProgram(null);	
 	}
 	
 	public static void mainProgram(String args[]) {
@@ -49,6 +43,7 @@ public class MainSolar {
 		/* Start threads of operators */ 
 		new Thread(new ExchangeMigration(solars)).start();
 		new Thread(new HiperArithmeticCrossover(solars)).start();
+		new Thread(new HiperGaussianMutation(solars)).start();
 		
 		/* Wait for the finish of each problem */		
 		for (int i = 0; i < solars.length; i++) {

@@ -15,13 +15,16 @@ public class HiperArithmeticCrossover implements HiperCrossover {
 		this.solars = solars;
 	}
 	
+	/**
+	 * By reference.
+	 */
 	@Override
 	public void doHiperCrossover(Chromosome c1, Chromosome c2) {
 		// Crossover c1 and c2 (if not busy)
-		if(!c1.isBusy() && c2.isBusy()) {			
+		if(!c1.isBusy() && !c2.isBusy()) {
 			for (int i = 0; i < c1.getGenes().length; i++) {
 				double a1 = c1.getGene(i);
-				double a2 = c2.getGene(i);				
+				double a2 = c2.getGene(i);
 				c1.setGene(i, a1 + (a2 - a1) * this.mt.nextDouble(true, true));
 				c2.setGene(i, a2 + (a1 - a2) * this.mt.nextDouble(true, true));
 			}			

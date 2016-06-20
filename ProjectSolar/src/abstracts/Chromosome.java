@@ -16,6 +16,7 @@ public abstract class Chromosome {
 		this.genes = genes;
 		this.objectives = objectives;
 		this.setFitness(0);
+		this.busy = false;
 	}
 	
 	public void setFitness(double fitness) {
