@@ -18,10 +18,14 @@ public class BestPairSurvivorSelection implements SurvivorSelection {
 		Collections.sort(Arrays.asList(offspring.getChromosomes()), new FitnessAscendantComparator());
 		
 		for (int i = 0; i < Configuration.NCHROMOSOME; i++) {
+			p.getChromosome(i).setBusy(true);
+			
 			if(p.getChromosome(i).getFitness() < offspring.getChromosome(i).getFitness())
 				survivor.setChromosome(i, p.getChromosome(i));
 			else
 				survivor.setChromosome(i, offspring.getChromosome(i));
+			
+			p.getChromosome(i).setBusy(false);
 		}
 		
 		return survivor;

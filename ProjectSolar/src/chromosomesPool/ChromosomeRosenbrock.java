@@ -12,6 +12,10 @@ public class ChromosomeRosenbrock extends Chromosome {
 		super(genes, objectives);
 	}
 	
+	public ChromosomeRosenbrock() {
+		super(null, null);
+	}
+	
 	public static ChromosomeRosenbrock createChromosome(int nGenes) {
 		double genes[] = initializeGenesAtRandom(nGenes, INFIMUM, MAXIMUM); // From superclass
 		return new ChromosomeRosenbrock(genes, new double[NOBJECTIVES]);

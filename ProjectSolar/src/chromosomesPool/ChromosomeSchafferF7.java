@@ -12,6 +12,10 @@ public class ChromosomeSchafferF7 extends Chromosome {
 		super(genes, objectives);
 	}
 	
+	public ChromosomeSchafferF7() {
+		super(null, null);
+	}
+	
 	public static ChromosomeSchafferF7 createChromosome(int nGenes) {
 		double genes[] = initializeGenesAtRandom(nGenes, INFIMUM, MAXIMUM); // From superclass
 		return new ChromosomeSchafferF7(genes, new double[NOBJECTIVES]);

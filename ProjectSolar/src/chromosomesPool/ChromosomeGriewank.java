@@ -12,6 +12,10 @@ public class ChromosomeGriewank extends Chromosome {
 		super(genes, objectives);
 	}
 	
+	public ChromosomeGriewank() {
+		super(null, null);
+	}
+	
 	public static ChromosomeGriewank createChromosome(int nGenes) {
 		double genes[] = initializeGenesAtRandom(nGenes, INFIMUM, MAXIMUM); // From superclass
 		return new ChromosomeGriewank(genes, new double[NOBJECTIVES]);
@@ -21,7 +25,7 @@ public class ChromosomeGriewank extends Chromosome {
 	public void evaluate() {
 		double value = MathFunctions.Griewank(super.getGenes());
 		super.setObjective(0, value); // zero is necessary. 
-		super.setFitness(value);	  // Ackley's function has one objective (fitness).
+		super.setFitness(value);	  // Ackley's function has one objective (fitness).		
 	}
 	
 	public static ChromosomeGriewank createEmptyChromosome(int nGenes) {

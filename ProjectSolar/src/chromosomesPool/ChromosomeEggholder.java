@@ -12,6 +12,10 @@ public class ChromosomeEggholder extends Chromosome {
 		super(genes, objectives);
 	}
 	
+	public ChromosomeEggholder() {
+		super(null, null);
+	}
+	
 	public static ChromosomeEggholder createChromosome(int nGenes) {
 		double genes[] = initializeGenesAtRandom(nGenes, INFIMUM, MAXIMUM); // From superclass
 		return new ChromosomeEggholder(genes, new double[NOBJECTIVES]);
@@ -21,7 +25,7 @@ public class ChromosomeEggholder extends Chromosome {
 	public void evaluate() {
 		double value = MathFunctions.Eggholder(super.getGenes());
 		super.setObjective(0, value); // zero is necessary. 
-		super.setFitness(value);	  // Ackley's function has one objective (fitness).
+		super.setFitness(value);	  // Ackley's function has one objective (fitness).		
 	}
 	
 	public static ChromosomeEggholder createEmptyChromosome(int nGenes) {

@@ -109,6 +109,41 @@ public abstract class Chromosome {
 		return genes;
 	}
 	
+	private void setSizeGenes(int nGenes) {
+		this.genes = new double[nGenes];
+	}
+	
+	private void setSizeObjectives(int nObjectives) {
+		this.objectives = new double[nObjectives];
+	}
+	
+	public static Chromosome copyChromosome(Chromosome c) {
+		Chromosome out = null;
+		try {
+			// Roughly create a new Chromosome from the subclass
+			out = c.getClass().newInstance(); // polymorphic calls default constructor of a subclass
+			out.setSizeGenes(c.getGenes().length);
+			out.setSizeObjectives(c.getObjectives().length);			
+			
+			// Copy genes 
+			for (int i = 0; i < c.getGenes().length; i++)
+				out.setGene(i, c.getGene(i));
+			// Copy objectives		
+			for (int i = 0; i < c.getObjectives().length; i++) 
+				out.setObjective(i, c.getObjective(i));
+			// Copy fitness		
+			out.setFitness(c.getFitness());
+			// Copy status
+			out.setBusy(c.isBusy());
+			
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		return out;
+	}
+	
 	/**
 	 * Abstract method for setting the fitness value.
 	 * Subclasses must call setFitness() to properly store fitness.

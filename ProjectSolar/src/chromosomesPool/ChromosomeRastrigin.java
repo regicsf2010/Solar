@@ -12,6 +12,10 @@ public class ChromosomeRastrigin extends Chromosome {
 		super(genes, objectives);
 	}
 	
+	public ChromosomeRastrigin() {
+		super(null, null);
+	}
+	
 	public static ChromosomeRastrigin createChromosome(int nGenes) {
 		double genes[] = initializeGenesAtRandom(nGenes, INFIMUM, MAXIMUM); // From superclass
 		return new ChromosomeRastrigin(genes, new double[NOBJECTIVES]);
@@ -21,7 +25,7 @@ public class ChromosomeRastrigin extends Chromosome {
 	public void evaluate() {
 		double value = MathFunctions.Rastrigin(super.getGenes());
 		super.setObjective(0, value); // zero is necessary. 
-		super.setFitness(value);	  // Ackley's function has one objective (fitness).
+		super.setFitness(value);	  // Ackley's function has one objective (fitness).		
 	}
 	
 	public static ChromosomeRastrigin createEmptyChromosome(int nGenes) {

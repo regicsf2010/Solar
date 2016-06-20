@@ -12,6 +12,10 @@ public class ChromosomeSchafferN2 extends Chromosome {
 		super(genes, objectives);
 	}
 	
+	public ChromosomeSchafferN2() {
+		super(null, null);
+	}
+	
 	public static ChromosomeSchafferN2 createChromosome(int nGenes) {
 		double genes[] = initializeGenesAtRandom(nGenes, INFIMUM, MAXIMUM); // From superclass
 		return new ChromosomeSchafferN2(genes, new double[NOBJECTIVES]);

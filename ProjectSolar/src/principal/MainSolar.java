@@ -8,6 +8,7 @@ import auxiliaries.Configuration.Ackley;
 import comparators.FitnessAscendantComparator;
 import implementations.ArithmeticCrossover;
 import implementations.BestPairSurvivorSelection;
+import implementations.ExchangeMigration;
 import implementations.GaussianMutation;
 import implementations.TournamentSelection;
 
@@ -15,17 +16,7 @@ public class MainSolar {
 	
 	public static void main(String args[]) {
 		//interfaceTest();
-		Solar s = new Solar(Ackley.ID, 0);
-		s.setParentSelectionInterface(new TournamentSelection());
-		s.setCrossoverInterface(new ArithmeticCrossover());
-		s.setMutationInterface(new GaussianMutation());
-		s.setSurvivorSelectionInterface(new BestPairSurvivorSelection());
-		
-		s.run();
-		
-		for (int i = 0; i < s.getPopulation().getChromosomes().length; i++) {
-			System.out.println(s.getPopulation().getChromosome(i).toString());
-		}
+		mainProgram(null);
 	}
 	
 	public static void interfaceTest() {
@@ -45,8 +36,11 @@ public class MainSolar {
 	public static void mainProgram(String args[]) {
 		/* Store new instances of the problem */ 
 		Solar solars[] = new Solar[Configuration.NPOPULATION];
+		Thread threads[] = new Thread[Configuration.NPOPULATION];
 		
 		/* Set graphs */ 
+		
+		
 		
 		/* Start each instance of the problem
 		   setting the multimodal function */
@@ -61,12 +55,26 @@ public class MainSolar {
 			solars[i].setSurvivorSelectionInterface(new BestPairSurvivorSelection());
 			
 			/* Start problem as a thread */
-			new Thread(solars[i]).start();
+			threads[i] = new Thread(solars[i]);
+			threads[i].start();
 		}
 		
 		/* Start threads of operators */ 
+		new Thread(new ExchangeMigration(solars)).start();
 		
-		/* Call scripts to store information about the performance */		
+		/* Wait for the finish of each problem */		
+		for (int i = 0; i < solars.length; i++) {
+			try {
+				threads[i].join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		/* Set this variable to 'false' will finish other threads (operators) */
+		Configuration.isRunning = false;
+		
+		/* Call scripts to store information about the performance */
 		
 	}
 

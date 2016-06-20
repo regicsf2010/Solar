@@ -11,6 +11,10 @@ public class ChromosomeAckley extends Chromosome {
 		super(genes, objectives);
 	}
 	
+	public ChromosomeAckley() {
+		super(null, null);
+	}
+	
 	public static ChromosomeAckley createChromosome(int nGenes) {
 		double genes[] = initializeGenesAtRandom(nGenes, INFIMUM, MAXIMUM); // From superclass
 		return new ChromosomeAckley(genes, new double[NOBJECTIVES]);
@@ -20,7 +24,7 @@ public class ChromosomeAckley extends Chromosome {
 	public void evaluate() {
 		double value = MathFunctions.Ackley(super.getGenes());
 		super.setObjective(0, value); // zero is necessary. 
-		super.setFitness(value);	  // Ackley's function has one objective (fitness).
+		super.setFitness(value);	  // Ackley's function has one objective (fitness).		
 	}
 
 	public static ChromosomeAckley createEmptyChromosome(int nGenes) {

@@ -18,7 +18,8 @@ public class Solar implements Runnable {
 	private Population p = null;
 	private Population selected = null;
 	private int function = -1;
-	private int id = -1; 
+	private int id = -1; // store the ID of the problem
+	private boolean on = false;
 	
 	private ParentSelection parentSelecionI = null;
 	private Crossover crossoverI = null;
@@ -63,10 +64,14 @@ public class Solar implements Runnable {
 		this.survivorSelectionI = survivorSelectionI;
 	}
 	
+	private void setOn() { this.on = true; }
+	private void setOff() { this.on = false; }
+	public boolean isOn() { return this.on; }	 
+	
 	@Override
 	public void run() {
-		
 		this.initializePopulation();
+		this.setOn(); // must be called after initialize population
 		this.calculateFitness(p);
 		
 		for (int i = 0; i < Configuration.NGENERATION; i++) {
@@ -76,6 +81,7 @@ public class Solar implements Runnable {
 			this.calculateFitness(selected);
 			this.p = this.survivorSelectionI.doSurvivorSelection(p, selected);
 		}
-		
+		this.setOff();
+		System.out.println("in " + this.id);
 	}
 }
