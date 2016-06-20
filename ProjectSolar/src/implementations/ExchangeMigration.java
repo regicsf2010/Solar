@@ -36,7 +36,7 @@ public class ExchangeMigration implements Migration {
 		
 		while(Configuration.isRunning) {
 			val = this.mt.nextDouble();
-			if(val < Configuration.MIGRATIONRATE) {
+			if(val <= Configuration.MIGRATIONRATE) {
 				// Randomize two populations' id
 				int id1 = this.mt.nextInt(Configuration.NPOPULATION);
 				int id2 = this.mt.nextInt(Configuration.NPOPULATION);

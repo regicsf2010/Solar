@@ -8,6 +8,7 @@ public class Configuration {
 	public static final double CROSSOVERRATE = 0.8;
 	public static final double MUTATIONRATE = 0.01;
 	public static final double MIGRATIONRATE = 0.001;
+	public static final double HIPERCROSSOVERRATE = 0.001;
 	public static final double SD = 0.3;
 	public static final int RANK = 3;
 	

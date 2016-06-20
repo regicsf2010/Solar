@@ -71,8 +71,8 @@ public class Solar implements Runnable {
 	@Override
 	public void run() {
 		this.initializePopulation();
-		this.setOn(); // must be called after initialize population
 		this.calculateFitness(p);
+		this.setOn(); // must be called after initialize population
 		
 		for (int i = 0; i < Configuration.NGENERATION; i++) {
 			this.selected = this.parentSelecionI.doParentSelection(p);
@@ -81,7 +81,6 @@ public class Solar implements Runnable {
 			this.calculateFitness(selected);
 			this.p = this.survivorSelectionI.doSurvivorSelection(p, selected);
 		}
-		this.setOff();
-		System.out.println("in " + this.id);
+		this.setOff();		
 	}
 }
