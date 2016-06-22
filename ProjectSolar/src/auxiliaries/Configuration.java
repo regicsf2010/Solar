@@ -1,14 +1,14 @@
 package auxiliaries;
 
 public class Configuration {
-	public static final int NPOPULATION = 5;
-	public static final int NCHROMOSOME = 10; // must be even ('cause of crossover)
-	public static final int NGENERATION = 500;	
+	public static final int NPOPULATION = 10;
+	public static final int NCHROMOSOME = 50; // must be even ('cause of crossover)
+	public static final int NGENERATION = 100;	
 	
 	public static final double CROSSOVERRATE = 0.8;
 	public static final double MUTATIONRATE = 0.01;
-	public static final double MIGRATIONRATE = 0.001;
-	public static final double HIPERCROSSOVERRATE = 0.001;
+	public static final double MIGRATIONRATE = 0.2;
+	public static final double HIPERCROSSOVERRATE = 0.08;
 	public static final double HIPERMUTATIONRATE = 0.001;
 	public static final double SD = 0.3;
 	public static final int RANK = 3;

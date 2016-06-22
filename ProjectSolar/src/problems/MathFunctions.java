@@ -106,7 +106,7 @@ public class MathFunctions {
 	}
 	
 	/**
-	 * Rosenbrock function. The minimum is f(1, 1) = 1.
+	 * Rosenbrock function. The minimum is f(1, 1) = 0.
 	 * Recommendation: vars should be [-200, 200]. 
 	 * @param vars
 	 * @return
@@ -115,7 +115,7 @@ public class MathFunctions {
 		double p = 0, a = 1, b = 100;
 		if(vars.length > 1) {
 			for (int i = 0; i < vars.length - 1; i++) 
-				p += b * Math.pow((vars[i + 1] - Math.pow(vars[i], 2)), 2) + Math.pow(vars[i] - a, 2);
+				p += b * Math.pow((vars[i + 1] - Math.pow(vars[i], 2)), 2) + Math.pow(a - vars[i], 2);
 		} else { // WARNING: please, do not use this 'else' version (it is a polynomial function only)
 			p = b * Math.pow(vars[0], 4) + Math.pow(vars[0] - a, 2);
 		}

@@ -1,7 +1,7 @@
 package principal;
 
 import auxiliaries.Configuration;
-import auxiliaries.Configuration.Ackley;
+import auxiliaries.Configuration.Griewank;
 import implementations.ArithmeticCrossover;
 import implementations.BestPairSurvivorSelection;
 import implementations.ExchangeMigration;
@@ -13,7 +13,13 @@ import implementations.TournamentSelection;
 public class MainSolar {
 	
 	public static void main(String args[]) {
-		mainProgram(null);	
+		mainProgram(null);
+//		ChromosomeRosenbrock c = ChromosomeRosenbrock.createChromosome(2);
+//		c.setGene(0, 1);
+//		c.setGene(1, 1);
+//		c.evaluate();
+//		System.out.println(c.toString());
+
 	}
 	
 	public static void mainProgram(String args[]) {
@@ -27,7 +33,7 @@ public class MainSolar {
 		   setting the multimodal function */
 		for (int i = 0; i < solars.length; i++) {
 			/* Start new instance of the problem */
-			solars[i] = new Solar(Ackley.ID, i);
+			solars[i] = new Solar(Griewank.ID, i);
 			
 			/* Set interfaces */ 
 			solars[i].setParentSelectionInterface(new TournamentSelection());
@@ -58,11 +64,11 @@ public class MainSolar {
 		Configuration.isRunning = false;
 		
 		
-		for (int i = 0; i < threads.length; i++) {
-			Population p = solars[i].getPopulation();
-			p.getChromosome(p.getFittest()).evaluate();
-			System.out.println(p.getChromosome(p.getFittest()).toString());			
-		}
+//		for (int i = 0; i < threads.length; i++) {
+//			Population p = solars[i].getPopulation();
+//			p.getChromosome(p.getFittest()).evaluate();
+//			System.out.println(p.getChromosome(p.getFittest()).toString());			
+//		}
 		
 		/* Call scripts to store information about the performance */
 		

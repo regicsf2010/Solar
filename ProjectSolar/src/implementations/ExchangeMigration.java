@@ -46,7 +46,7 @@ public class ExchangeMigration implements Migration {
 					this.doMigration(solars[id1].getPopulation(), solars[id2].getPopulation());
 			}
 		}
-		System.out.println("Migration operator finished");
+		//System.out.println("Migration operator finished");
 	}
 
 }

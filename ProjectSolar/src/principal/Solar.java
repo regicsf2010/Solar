@@ -1,6 +1,7 @@
 package principal;
 
 import auxiliaries.Configuration;
+import auxiliaries.Scripts;
 import interfaces.Crossover;
 import interfaces.Mutation;
 import interfaces.ParentSelection;
@@ -25,6 +26,10 @@ public class Solar implements Runnable {
 	private Crossover crossoverI = null;
 	private Mutation mutationI = null;
 	private SurvivorSelection survivorSelectionI = null;
+	
+	private double mean[] = new double[Configuration.NGENERATION];
+	private double std[] = new double[Configuration.NGENERATION];
+	private double fittest[] = new double[Configuration.NGENERATION];
 	
 	public Solar(int function, int id) {
 		this.function = function;
@@ -75,12 +80,19 @@ public class Solar implements Runnable {
 		this.setOn(); // must be called after initialize population
 		
 		for (int i = 0; i < Configuration.NGENERATION; i++) {
+			p.calculateFitnessMean();
+			p.calculateFitnessStd();
+			this.mean[i] = p.getFitnessMean();
+			this.std[i] = p.getFitnessStd();
+			this.fittest[i] = p.getChromosome(p.getFittest()).getFitness();
+			
 			this.selected = this.parentSelecionI.doParentSelection(p);
 			this.selected = this.crossoverI.doCrossover(selected);
 			this.mutationI.doMutation(selected);
 			this.calculateFitness(selected);
-			this.p = this.survivorSelectionI.doSurvivorSelection(p, selected);
+			this.p = this.survivorSelectionI.doSurvivorSelection(p, selected);			
 		}
-		this.setOff();		
+		this.setOff();
+		Scripts.writeMatlabScript("e" + String.valueOf(this.getId()), mean, std, fittest);
 	}
 }
