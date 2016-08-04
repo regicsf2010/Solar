@@ -23,10 +23,12 @@ public class ExchangeMigration implements Migration {
 		int idx_p2 = this.mt.nextInt(Configuration.NCHROMOSOME);
 		
 		// Swap them between p1 and p2 (if not busy)
-		if(!p1.getChromosome(idx_p1).isBusy() && !p2.getChromosome(idx_p2).isBusy()) {
-			Chromosome aux = Chromosome.copyChromosome(p1.getChromosome(idx_p1));
-			p1.setChromosome(idx_p1, p2.getChromosome(idx_p2));
-			p2.setChromosome(idx_p2, aux);
+		if(!p1.isBusy() && !p2.isBusy()){
+			if(!p1.getChromosome(idx_p1).isBusy() && !p2.getChromosome(idx_p2).isBusy()) {
+				Chromosome aux = Chromosome.copyChromosome(p1.getChromosome(idx_p1));
+				p1.setChromosome(idx_p1, p2.getChromosome(idx_p2));
+				p2.setChromosome(idx_p2, aux);
+			}
 		}
 	}
 	

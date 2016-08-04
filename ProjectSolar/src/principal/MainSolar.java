@@ -1,5 +1,8 @@
 package principal;
 
+import java.text.DecimalFormat;
+
+import abstracts.Chromosome;
 import auxiliaries.Configuration;
 import auxiliaries.Configuration.Griewank;
 import implementations.ArithmeticCrossover;
@@ -63,12 +66,13 @@ public class MainSolar {
 		/* Set this variable to 'false' will finish other threads (operators) */
 		Configuration.isRunning = false;
 		
-		
-//		for (int i = 0; i < threads.length; i++) {
-//			Population p = solars[i].getPopulation();
-//			p.getChromosome(p.getFittest()).evaluate();
-//			System.out.println(p.getChromosome(p.getFittest()).toString());			
-//		}
+		DecimalFormat df = new DecimalFormat("#.###");
+		for (int i = 0; i < threads.length; i++) {
+			Population p = solars[i].getPopulation();
+			Chromosome c = p.getChromosome(p.getFittest());
+			c.evaluate();
+			System.out.println("(" + df.format(c.getGene(0)) + ", " + df.format(c.getFitness()) + ")");
+		}
 		
 		/* Call scripts to store information about the performance */
 		

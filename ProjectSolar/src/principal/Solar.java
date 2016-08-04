@@ -93,6 +93,6 @@ public class Solar implements Runnable {
 			this.p = this.survivorSelectionI.doSurvivorSelection(p, selected);			
 		}
 		this.setOff();
-		Scripts.writeMatlabScript("e" + String.valueOf(this.getId()), mean, std, fittest);
+		//Scripts.writeMatlabScript("e" + String.valueOf(this.getId()), mean, std, fittest);
 	}
 }

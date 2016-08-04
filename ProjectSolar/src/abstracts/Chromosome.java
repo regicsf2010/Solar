@@ -9,7 +9,7 @@ public abstract class Chromosome {
 	private double genes[];
 	private double objectives[];
 	
-	/*This variable controls the access of the chromosome*/
+	/*This variable controls the access to the chromosome*/
 	private boolean busy;
 	
 	public Chromosome(double genes[], double objectives[]) {
@@ -54,8 +54,6 @@ public abstract class Chromosome {
 	public boolean isBusy() {
 		return this.busy;
 	}
-	
-	
 
 	public double getObjective(int index) {
 		return this.objectives[index];

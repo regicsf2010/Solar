@@ -14,8 +14,12 @@ public class BestPairSurvivorSelection implements SurvivorSelection {
 	public Population doSurvivorSelection(Population p, Population offspring) {
 		Population survivor = Population.createPopulation(Configuration.NCHROMOSOME, p.getFunction(), false);
 		
+		p.setBusy(true);
 		Collections.sort(Arrays.asList(p.getChromosomes()), new FitnessAscendantComparator());
+		p.setBusy(false);
+		offspring.setBusy(true);
 		Collections.sort(Arrays.asList(offspring.getChromosomes()), new FitnessAscendantComparator());
+		offspring.setBusy(false);
 		
 		for (int i = 0; i < Configuration.NCHROMOSOME; i++) {
 			p.getChromosome(i).setBusy(true);

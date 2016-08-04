@@ -31,6 +31,9 @@ public class Population {
 	private double objectivesMean[] = null;
 	private double objectivesStd[] = null;
 	
+	/*This variable controls the access to the population*/
+	private boolean busy;
+	
 	public static Population createPopulation(int nChromosome, int function, boolean random) {
 		Population p = new Population(nChromosome, function);
 		for (int i = 0; i < nChromosome; i++) // must be always done
@@ -95,6 +98,7 @@ public class Population {
 		 this.chromoPool = new Chromosome[nChromosome];
 		 this.nChromosome = nChromosome;
 		 this.function = function;
+		 this.busy = false;
 	}
 	
 	public Chromosome getChromosome(int index) {
@@ -146,7 +150,15 @@ public class Population {
 	public double[] getObjectivesStd() {
 		return this.objectivesStd;
 	}
-		
+	
+	public void setBusy(boolean busy) {
+		this.busy = busy;
+	}
+	
+	public boolean isBusy() {
+		return this.busy;
+	}
+	
 	public void calculateFitnessMean() {
 		double mean = 0;
 		for (int i = 0; i < this.getSize(); i++) 
