@@ -1,7 +1,6 @@
 package principal;
 
 import auxiliaries.Configuration;
-import auxiliaries.Scripts;
 import interfaces.Crossover;
 import interfaces.Mutation;
 import interfaces.ParentSelection;

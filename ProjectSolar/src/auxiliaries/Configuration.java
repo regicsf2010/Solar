@@ -13,10 +13,11 @@ public class Configuration {
 	public static final double SD = 0.3;
 	public static final int RANK = 3;
 	
-	public static boolean isRunning = true; 
+	public static boolean isRunning = true; // control thread genetic operator
 	
 	public static final MersenneTwisterFast MT = new MersenneTwisterFast(System.currentTimeMillis());
 	
+	public static final String pattern = "\\((\\d+,\\d+)\\)(\\[(-?\\d+)\\])?"; // recognize weighted graphs
 	
 	/*Simple structures for each problem*/
 	public class Ackley { public static final int ID = 0; public static final int NGENES = 2; }

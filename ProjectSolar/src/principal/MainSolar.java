@@ -17,12 +17,6 @@ public class MainSolar {
 	
 	public static void main(String args[]) {
 		mainProgram(null);
-//		ChromosomeRosenbrock c = ChromosomeRosenbrock.createChromosome(2);
-//		c.setGene(0, 1);
-//		c.setGene(1, 1);
-//		c.evaluate();
-//		System.out.println(c.toString());
-
 	}
 	
 	public static void mainProgram(String args[]) {
@@ -31,6 +25,7 @@ public class MainSolar {
 		Thread threads[] = new Thread[Configuration.NPOPULATION];
 		
 		/* Set graphs */ 		
+		
 		
 		/* Start each instance of the problem
 		   setting the multimodal function */
