@@ -26,6 +26,6 @@ public class Configuration {
 	public class SchafferF7 { public static final int ID = 3; public static final int NGENES = 2; }
 	public class Eggholder { public static final int ID = 4; public static final int NGENES = 2; }
 	public class Griewank { public static final int ID = 5; public static final int NGENES = 1; }
-	public class Rastrigin { public static final int ID = 6; public static final int NGENES = 1; }
+	public class Rastrigin { public static final int ID = 6; public static final int NGENES = 2; }
 	public class Rosenbrock { public static final int ID = 7; public static final int NGENES = 2; }
 }

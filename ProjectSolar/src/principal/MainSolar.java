@@ -4,7 +4,8 @@ import java.text.DecimalFormat;
 
 import abstracts.Chromosome;
 import auxiliaries.Configuration;
-import auxiliaries.Configuration.Griewank;
+import auxiliaries.Configuration.Rastrigin;
+import auxiliaries.Graph;
 import implementations.ArithmeticCrossover;
 import implementations.BestPairSurvivorSelection;
 import implementations.ExchangeMigration;
@@ -16,7 +17,11 @@ import implementations.TournamentSelection;
 public class MainSolar {
 	
 	public static void main(String args[]) {
-		mainProgram(null);
+		//mainProgram(null);
+		Graph g = new Graph(Configuration.NPOPULATION);
+		System.out.println(g.toString());
+		g.setAutoAssociation(true);
+		System.out.println(g.toString());
 	}
 	
 	public static void mainProgram(String args[]) {
@@ -31,7 +36,7 @@ public class MainSolar {
 		   setting the multimodal function */
 		for (int i = 0; i < solars.length; i++) {
 			/* Start new instance of the problem */
-			solars[i] = new Solar(Griewank.ID, i);
+			solars[i] = new Solar(Rastrigin.ID, i);
 			
 			/* Set interfaces */ 
 			solars[i].setParentSelectionInterface(new TournamentSelection());
@@ -66,7 +71,14 @@ public class MainSolar {
 			Population p = solars[i].getPopulation();
 			Chromosome c = p.getChromosome(p.getFittest());
 			c.evaluate();
-			System.out.println("(" + df.format(c.getGene(0)) + ", " + df.format(c.getFitness()) + ")");
+			
+			System.out.print("(");
+			for (int j = 0; j < c.getGenes().length; j++) {
+				System.out.print(df.format(c.getGene(j)));
+				if(j != c.getGenes().length - 1)
+					System.out.print(", ");
+			}
+			System.out.println(") | f(x) = " + df.format(c.getFitness()));			
 		}
 		
 		/* Call scripts to store information about the performance */
