@@ -1,5 +1,6 @@
 package auxiliaries;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -82,14 +83,15 @@ public class Graph {
 	 */
 	@Override
 	public String toString() {
-		String output = String.format("%7s", " ");
-		for (int i = 0; i < this.mat.length; i++)
-			output += String.format("%4d ", i);
+		DecimalFormat df = new DecimalFormat("#.###");
+		String output = String.format("%9s", " "); // initial space (first line)
+		for (int i = 0; i < this.mat.length; i++)  // write the top vertexes number
+			output += String.format("%6d ", i);
 		output += "\n";
-		for (int i = 0; i < this.mat.length; i++) {
-			output += String.format("%4d-->", i);
+		for (int i = 0; i < this.mat.length; i++) {// write each line (adjacencies)
+			output += String.format("%6d-->", i);
 			for (int j = 0; j < this.mat.length; j++)
-				output += String.format("%4f ", this.mat[i][j]);
+				output += String.format("%6s ", df.format(this.mat[i][j]));
 			output += "\n";
 		}
 		output += "\n";

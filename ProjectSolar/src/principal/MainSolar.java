@@ -18,10 +18,9 @@ public class MainSolar {
 	
 	public static void main(String args[]) {
 		//mainProgram(null);
-		Graph g = new Graph(Configuration.NPOPULATION);
-		System.out.println(g.toString());
-		g.setAutoAssociation(true);
-		System.out.println(g.toString());
+		//Graph g = new Graph(Configuration.NPOPULATION);
+		
+
 	}
 	
 	public static void mainProgram(String args[]) {
