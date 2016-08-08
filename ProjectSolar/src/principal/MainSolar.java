@@ -5,7 +5,6 @@ import java.text.DecimalFormat;
 import abstracts.Chromosome;
 import auxiliaries.Configuration;
 import auxiliaries.Configuration.Rastrigin;
-import auxiliaries.Graph;
 import implementations.ArithmeticCrossover;
 import implementations.BestPairSurvivorSelection;
 import implementations.ExchangeMigration;
@@ -18,9 +17,7 @@ public class MainSolar {
 	
 	public static void main(String args[]) {
 		//mainProgram(null);
-		//Graph g = new Graph(Configuration.NPOPULATION);
 		
-
 	}
 	
 	public static void mainProgram(String args[]) {

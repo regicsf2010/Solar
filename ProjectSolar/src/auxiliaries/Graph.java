@@ -33,7 +33,7 @@ public class Graph {
 	}
 
 	public boolean hasEdge(int v1, int v2) {
-		if (this.mat[v1][v2] > 0)
+		if (this.mat[v1][v2] != 0)
 			return true;
 		return false;
 	}
@@ -67,7 +67,8 @@ public class Graph {
 		Matcher m = r.matcher(graphPattern);
 		while (m.find()) {
 			String aux[] = m.group(1).split(",");
-			g.insertEdge(Integer.valueOf(aux[0]), Integer.valueOf(aux[1]), Integer.valueOf(m.group(3)));
+			g.insertEdge(Integer.valueOf(aux[0]), Integer.valueOf(aux[1]), 
+					     (m.group(3) != null && Integer.valueOf(m.group(3)) != 0)? Integer.valueOf(m.group(3)):1);
 		}
 		return g;
 	}
@@ -94,7 +95,6 @@ public class Graph {
 				output += String.format("%6s ", df.format(this.mat[i][j]));
 			output += "\n";
 		}
-		output += "\n";
 		return output;
 	}
 }
