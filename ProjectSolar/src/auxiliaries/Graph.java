@@ -43,13 +43,15 @@ public class Graph {
 		// That's why the use of a List
 		List<Integer> aux = new ArrayList<Integer>();
 		for (int i = 0; i < mat.length; i++)
-			if (this.mat[v][i] < 0 || this.mat[v][i] > 0)
+			if (this.mat[v][i] != 0)
 				aux.add(i);
 		// Copy the index of the vertices connected to v
-		int values[] = new int[aux.size()];
-		for (int i = 0; i < aux.size(); i++)
-			values[i] = aux.get(i).intValue();
-
+		int values[] = null;
+		if(!aux.isEmpty()) {
+			values = new int[aux.size()];
+			for (int i = 0; i < aux.size(); i++)
+				values[i] = aux.get(i).intValue();
+		}
 		return values;
 	}
 
@@ -77,6 +79,12 @@ public class Graph {
 		int c = value ? 1 : 0;
 		for (int i = 0; i < this.mat.length; i++)
 			this.mat[i][i] = c;
+	}
+	
+	public void completeGraph() {
+		for (int i = 0; i < this.mat.length; i++) 
+			for (int j = 0; j < this.mat.length; j++) 
+				this.mat[i][j] = 1;		
 	}
 
 	/**

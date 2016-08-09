@@ -2,7 +2,7 @@ package abstracts;
 
 import java.text.DecimalFormat;
 
-import auxiliaries.Configuration;
+import auxiliaries.MersenneTwisterFast;
 
 public abstract class Chromosome {
 	private double fitness;
@@ -101,8 +101,11 @@ public abstract class Chromosome {
 	 */
 	protected static double[] initializeGenesAtRandom(int nGenes, double infimum, double maximum) {
 		double genes[] = new double[nGenes]; double val = 0;
+		// This 'mt' variable must be instantiated here because 'MersenneTwisterFast' class is
+		// not Thread safe.
+		MersenneTwisterFast mt = new MersenneTwisterFast(System.currentTimeMillis());
 		for (int i = 0; i < genes.length; i++) {
-			val = Configuration.MT.nextDouble(true, true); // inclusive [0, 1]
+			val = mt.nextDouble(true, true); // inclusive [0, 1]
 			genes[i] = (1 - val) * infimum + val * maximum;
 		}
 		return genes;

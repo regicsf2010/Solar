@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 import abstracts.Chromosome;
 import auxiliaries.Configuration;
 import auxiliaries.Configuration.Rastrigin;
+import auxiliaries.Graph;
 import implementations.ArithmeticCrossover;
 import implementations.BestPairSurvivorSelection;
 import implementations.ExchangeMigration;
@@ -16,7 +17,7 @@ import implementations.TournamentSelection;
 public class MainSolar {
 	
 	public static void main(String args[]) {
-		//mainProgram(null);
+		//mainProgram(null);			
 		
 	}
 	
@@ -26,7 +27,8 @@ public class MainSolar {
 		Thread threads[] = new Thread[Configuration.NPOPULATION];
 		
 		/* Set graphs */ 		
-		
+		Graph island = new Graph(Configuration.NPOPULATION);
+		island.completeGraph();
 		
 		/* Start each instance of the problem
 		   setting the multimodal function */
@@ -46,8 +48,8 @@ public class MainSolar {
 		}
 		
 		/* Start threads of operators */ 
-		new Thread(new ExchangeMigration(solars)).start();
-		new Thread(new HiperArithmeticCrossover(solars)).start();
+		new Thread(new ExchangeMigration(solars, island)).start();
+		new Thread(new HiperArithmeticCrossover(solars, island)).start();
 		new Thread(new HiperGaussianMutation(solars)).start();
 		
 		/* Wait for the finish of each problem */		

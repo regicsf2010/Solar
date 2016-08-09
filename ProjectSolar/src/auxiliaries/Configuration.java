@@ -15,8 +15,6 @@ public class Configuration {
 	
 	public static boolean isRunning = true; // control thread genetic operator
 	
-	public static final MersenneTwisterFast MT = new MersenneTwisterFast(System.currentTimeMillis());
-	
 	public static final String pattern = "\\((\\d+,\\d+)\\)(\\[(-?\\d+)\\])?"; // recognize weighted graphs
 	
 	/*Simple structures for each problem*/

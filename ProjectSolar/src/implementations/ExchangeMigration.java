@@ -2,6 +2,7 @@ package implementations;
 
 import abstracts.Chromosome;
 import auxiliaries.Configuration;
+import auxiliaries.Graph;
 import auxiliaries.MersenneTwisterFast;
 import interfaces.Migration;
 import principal.Population;
@@ -10,10 +11,12 @@ import principal.Solar;
 public class ExchangeMigration implements Migration {
 	
 	private Solar solars[] = null;
+	private Graph island = null;
 	private final MersenneTwisterFast mt = new MersenneTwisterFast(System.currentTimeMillis());
 	
-	public ExchangeMigration(Solar solars[]) {
+	public ExchangeMigration(Solar solars[], Graph island) {
 		this.solars = solars;
+		this.island = island;
 	}
 	
 	@Override
@@ -41,7 +44,9 @@ public class ExchangeMigration implements Migration {
 			if(val <= Configuration.MIGRATIONRATE) {
 				// Randomize two populations' id
 				int id1 = this.mt.nextInt(Configuration.NPOPULATION);
-				int id2 = this.mt.nextInt(Configuration.NPOPULATION);
+				int adjs[] = this.island.getAdjInd(id1);
+				if(adjs == null) continue;
+				int id2 = adjs[this.mt.nextInt(adjs.length)];
 				
 				// call doMigration
 				if(solars[id1].isOn() && solars[id2].isOn())
