@@ -1,6 +1,7 @@
 package principal;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 import abstracts.Chromosome;
 import auxiliaries.Configuration;
@@ -10,21 +11,21 @@ import implementations.ArithmeticCrossover;
 import implementations.BestPairSurvivorSelection;
 import implementations.ExchangeMigration;
 import implementations.GaussianMutation;
-import implementations.HiperArithmeticCrossover;
-import implementations.HiperGaussianMutation;
+import implementations.HyperArithmeticCrossover;
+import implementations.HyperGaussianMutation;
 import implementations.TournamentSelection;
 
 public class MainSolar {
 	
 	public static void main(String args[]) {
-		//mainProgram(null);			
+		mainProgram(null);			
 		
 	}
 	
 	public static void mainProgram(String args[]) {
 		/* Store new instances of the problem */ 
 		Solar solars[] = new Solar[Configuration.NPOPULATION];
-		Thread threads[] = new Thread[Configuration.NPOPULATION];
+		Thread problems[] = new Thread[Configuration.NPOPULATION];
 		
 		/* Set graphs */ 		
 		Graph island = new Graph(Configuration.NPOPULATION);
@@ -43,19 +44,23 @@ public class MainSolar {
 			solars[i].setSurvivorSelectionInterface(new BestPairSurvivorSelection());
 			
 			/* Start problem as a thread */
-			threads[i] = new Thread(solars[i]);
-			threads[i].start();
+			problems[i] = new Thread(solars[i]);
+			problems[i].start();
 		}
 		
-		/* Start threads of operators */ 
-		new Thread(new ExchangeMigration(solars, island)).start();
-		new Thread(new HiperArithmeticCrossover(solars, island)).start();
-		new Thread(new HiperGaussianMutation(solars)).start();
+		/* Start threads of operators */
+		ArrayList<Thread> operators = new ArrayList<Thread>();
+		operators.add(new Thread(new ExchangeMigration(solars, island)));
+		operators.add(new Thread(new HyperArithmeticCrossover(solars, island)));
+		operators.add(new Thread(new HyperGaussianMutation(solars)));
+		for (Thread t : operators) 
+			t.start();
+		
 		
 		/* Wait for the finish of each problem */		
 		for (int i = 0; i < solars.length; i++) {
 			try {
-				threads[i].join();
+				problems[i].join();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -64,8 +69,18 @@ public class MainSolar {
 		/* Set this variable to 'false' will finish other threads (operators) */
 		Configuration.isRunning = false;
 		
+		/* Wait for the finish of each operator */
+		for (int i = 0; i < operators.size(); i++) {
+			try {
+				operators.get(i).join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		System.out.println("\nBest result of each population:");
 		DecimalFormat df = new DecimalFormat("#.###");
-		for (int i = 0; i < threads.length; i++) {
+		for (int i = 0; i < problems.length; i++) {
 			Population p = solars[i].getPopulation();
 			Chromosome c = p.getChromosome(p.getFittest());
 			c.evaluate();
@@ -76,7 +91,7 @@ public class MainSolar {
 				if(j != c.getGenes().length - 1)
 					System.out.print(", ");
 			}
-			System.out.println(") | f(x) = " + df.format(c.getFitness()));			
+			System.out.println(") | f(x) = " + df.format(c.getFitness()));		
 		}
 		
 		/* Call scripts to store information about the performance */

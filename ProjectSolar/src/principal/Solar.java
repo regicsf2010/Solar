@@ -76,6 +76,7 @@ public class Solar implements Runnable {
 	public void run() {
 		this.initializePopulation();
 		this.calculateFitness(p);
+		
 		this.setOn(); // must be called after initialize population
 		
 		for (int i = 0; i < Configuration.NGENERATION; i++) {
@@ -91,7 +92,8 @@ public class Solar implements Runnable {
 			this.calculateFitness(selected);
 			this.p = this.survivorSelectionI.doSurvivorSelection(p, selected);			
 		}
-		this.setOff();
+		
+		this.setOff();  // must be called after convergence
 		//Scripts.writeMatlabScript("e" + String.valueOf(this.getId()), mean, std, fittest);
 	}
 }
